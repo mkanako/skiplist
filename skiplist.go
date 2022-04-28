@@ -157,15 +157,7 @@ func (list *SkipList) Set(key, value interface{}) (elem *Element) {
 		prevElemHeaders[i] = prevHeader
 
 		for next := prevHeader.levels[i]; next != nil; next = prevHeader.levels[i] {
-			if comp := list.compare(score, key, next); comp <= 0 {
-				// Find the elem with the same key.
-				// Update value and return the elem.
-				if comp == 0 {
-					elem = next
-					elem.Value = value
-					return
-				}
-
+			if comp := list.compare(score, key, next); comp < 0 {
 				break
 			}
 
